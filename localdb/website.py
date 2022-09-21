@@ -2,6 +2,7 @@ from django.shortcuts import render
 from PIL import Image
 import os, json
 from io import BytesIO
+import base64
 
 def init_user(mob, passwd):
     if not os.path.exists("data/"+mob):
@@ -21,7 +22,7 @@ def init_user(mob, passwd):
 
 def save_imgs(request):
     if request.session['mob']:
-        img_arr = request.FILES['imgs']
-        print(img_arr.__dict__)
+        file = request.FILES['imgs']
+        print('---------------', base64.encodebytes(file.read()))
         return 0
 
