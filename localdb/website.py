@@ -22,9 +22,6 @@ def init_user(mob, passwd):
 def save_imgs(request):
     if request.session['mob']:
         img_arr = request.FILES['imgs']
-        for img in img_arr:
-            fn = "data/" + request.session['mob'] +'/test.jpg'
-            test_img = Image.open(BytesIO(img))
-            test_img.save(fn)
+        print(img_arr.__dict__)
         return 0
 
