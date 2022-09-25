@@ -5,16 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap-grid.min.css" integr0ity="sha512-Aa+z1qgIG+Hv4H2W3EMl3btnnwTQRA47ZiSecYSkWavHUkBF2aPOIIvlvjLCsjapW1IfsGrEO3FU693ReouVTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    Welcome {{ mob }}
-    <input type="button" name="logout" id="logout" value="Log Out" 
-    onclick="location.href='/doLogin?logout=true'">
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Welcome, {{ mob }}</a>
+            <span class="navbar-text">
+                <input type="button" name="logout" id="logout" value="Log Out" onclick="location.href='/doLogin?logout=true'">
+            </span>
+          </div>
+        </div>
+      </nav>
     <form action="save_imgs" method="post" enctype='multipart/form-data'>
         <input type="file" name="imgs" id="imgs">
         {% csrf_token %}
         <button>submit</button>
     </form>
+    <div class="content-wrapper">
+        {% for data in data_list %}
+        <div class="news-card">
+          <a href="#" class="news-card__card-link"></a>
+          <img src="{% static data %}" alt="" class="news-card__image">
+          <div class="news-card__text-wrapper">
+            x
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <nav aria-label="...">
+        <ul class="pagination">
+            {% if  current_page != last_page %}
+            {% if current_page == 1 %}
+            <li class="page-item disabled">
+            {% else %}
+            <li class="page-item">
+            {% endif %}
+            <span class="page-link">Previous</span>
+        </li>
+        {% endif %}
+          {% if  current_page != last_page %}
+            <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+            </li>
+        {% endif %}
+        </ul>
+      </nav>
 </body>
 </html>

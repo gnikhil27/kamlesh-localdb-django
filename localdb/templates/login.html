@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Login With your mobile:</title>
 </head>
 <body>
-    <form action="/doLogin" method="post">
-        <div>
-            Enter Mobile No: 
-            <input type="number" name="mob" id="mob">
-        </div>
-        <div>
-            Enter Password: 
-            <input type="password" name="passwd" id="passwd">
-        </div>
-        <div>
-            {% csrf_token %}
-            <button>Log In</button>
-        </div>
-    </form>
+    <div id="main" class="container"> 	
+        <form name="loginform" id="loginform" action="/doLogin" method="post" class="wpl-track-me"> 
+            <p class="login-username">
+            <label for="user_login">Phone No.</label> 
+                <input type="number" name="mob" id="user_login" class="input" placeholder="123" value="" size="20" /> 
+            </p> 
+            <p class="login-password"> 
+                <label for="user_pass">Password</label><input type="password" name="passwd" id="user_pass" class="input" placeholder="●●●●●●●●●" value="" size="20" /> 
+            </p> 
+            <p class="login-remember">
+                <label><input name="rememberme" type="checkbox" id="rememberme" value="forever"> Remember me</label></p>
+            <p class="login-submit">
+                {% csrf_token %}
+                <input type="submit" name="wp-submit" id="wp-submit" class="button-primary" value="Login" />
+            </p> 
+            <p class="nav">
+                <a class="login-forget" href="#" title="Password Lost and Found">Forgot your password?</a>
+            </p>
+        </form> 
+    </div>
 </body>
 </html>
